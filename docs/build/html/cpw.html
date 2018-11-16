@@ -1,0 +1,284 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CPW &mdash; qsd 0.01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> qsd
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.01
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Using the Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">To Do List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html#contact">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Help</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vacuumflucs.html">vacuum_flucs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sshcommand.html">SSH_Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataprocess.html">process_data</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="current_density.html">Preprocessing - Determine the Current Density</a></li>
+<li class="toctree-l1"><a class="reference internal" href="remote_connection.html">Interfacing with a Remote Machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="single_spin_coupling.html">Postprocessing - Single Spin Coupling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="purcell_enhancement.html">Postprocessing - Purcell Enhancement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pulse_fidelity.html">Postprocessing - Pi Pulse Fidelity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cutline_single_spin.html">Postprocessing - Single Spin Coupling for a Cut Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cutline_purcell.html">Postprocessing - Purcell Enhancement for a Cut Line</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">qsd</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>CPW</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/cpw.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-CPW">
+<span id="cpw"></span><h1>CPW<a class="headerlink" href="#module-CPW" title="Permalink to this headline">¶</a></h1>
+<p>This program wil calculate the electromagnetic properties of cpw resonators</p>
+<dl class="class">
+<dt id="CPW.CPW">
+<em class="property">class </em><code class="descclassname">CPW.</code><code class="descname">CPW</code><span class="sig-paren">(</span><em>x</em>, <em>l</em>, <em>w</em>, <em>t</em>, <em>pen</em>, <em>Z</em>, <em>omega</em><span class="sig-paren">)</span><a class="headerlink" href="#CPW.CPW" title="Permalink to this definition">¶</a></dt>
+<dd><p>CPW contains the methods for calculating electromagntic properties of cpw resonator</p>
+<dl class="method">
+<dt id="CPW.CPW.E">
+<code class="descname">E</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CPW.CPW.E" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates electroc field of supercodnuctor</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CPW.CPW.J">
+<code class="descname">J</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CPW.CPW.J" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates un-normalized vacuum current density</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CPW.CPW.conductivity">
+<code class="descname">conductivity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CPW.CPW.conductivity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates conductivity of superconductor</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CPW.CPW.current">
+<code class="descname">current</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#CPW.CPW.current" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates critical current</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CPW.CPW.normalize_J">
+<code class="descname">normalize_J</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CPW.CPW.normalize_J" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalizes vacuum current density</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CPW.CPW.resistance">
+<code class="descname">resistance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CPW.CPW.resistance" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculates resistance of superconductor</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CPW.CPW.resistivity">
+<code class="descname">resistivity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CPW.CPW.resistivity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates resistivity of superconductor</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Gareth Sion Jones
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'0.01',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

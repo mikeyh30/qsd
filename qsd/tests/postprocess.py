@@ -4,12 +4,12 @@ import os
 import numpy as np
 import numpy.matlib
 import matplotlib.pyplot as plt
-from data_processing import readcomsol,postproc
+from qsd.data_processing import readcomsol,postproc
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
 # Read data from downloads
-file_dbx = os.getcwd() + '/data_postprocess/downloads/exports/Bx_fullData.csv'
-file_dby = os.getcwd() + '/data_postprocess/downloads/exports/By_fullData.csv'
+file_dbx = os.getcwd() + '/downloads/exports/Bx_fullData.csv'
+file_dby = os.getcwd() + '/downloads/exports/By_fullData.csv'
 
 rdx = readcomsol.ReadComsol(file_dbx)
 rdy = readcomsol.ReadComsol(file_dby)

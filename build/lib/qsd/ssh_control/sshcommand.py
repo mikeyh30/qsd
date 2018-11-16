@@ -26,7 +26,7 @@ class SSHCommand:
 
         sshfile = os.getenv("HOME") + '/.ssh/config'
         file = open(sshfile,"a")
-        file.write("\n"
+        file.write("\n")
         file.write("Host %s\n" % self.host)
         file.write("    HostName %s\n" % self.host_network)
         file.write("    User %s\n" % self.user)
