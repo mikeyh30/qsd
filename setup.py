@@ -12,5 +12,5 @@ setup(
             'Documentation': 'https://packaging.python.org/tutorials/distributing-packages/',
             'Source': 'https://github.com/garethsion/qsd.git',
             },
-        install_requires=['numpy','scipy']
+        #install_requires=['numpy','scipy']
     )
