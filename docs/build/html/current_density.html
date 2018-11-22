@@ -176,18 +176,19 @@
 <h1>Preprocessing - Determine the Current Density<a class="headerlink" href="#preprocessing-determine-the-current-density" title="Permalink to this headline">¶</a></h1>
 <p>The first thing which is required is to define the geometry of the cpw. In this code exapmle, we call the SetParams object, which reads a text file containing the relevant resonator parameters. We define a grid over the enntire resonator structure, and then calcualte analytically the current density and critical current for the cpw. These values are saved in a parameter listr which gets sent to COMSOL, and the datafiles are stored locally.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">qsd.electromagnetics</span> <span class="k">import</span> <span class="n">cpw</span>
 <span class="kn">from</span> <span class="nn">qsd.data_processing</span> <span class="k">import</span> <span class="n">setparams</span>
 
 <span class="c1"># Define geometry of the superconductor</span>
-<span class="n">setp</span> <span class="o">=</span> <span class="n">SetParams</span><span class="o">.</span><span class="n">SetParams</span><span class="p">()</span>
-<span class="n">params</span> <span class="o">=</span> <span class="n">setp</span><span class="o">.</span><span class="n">set_params</span><span class="p">()</span>
+<span class="n">setp</span> <span class="o">=</span> <span class="n">setparams</span><span class="o">.</span><span class="n">SetParams</span><span class="p">()</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">setp</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="s2">&quot;cpw_parameters.txt&quot;</span><span class="p">)</span>
+
 <span class="n">w</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;w&quot;</span><span class="p">]</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">]</span>
 <span class="n">l</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;l&quot;</span><span class="p">]</span>
 <span class="n">pen</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;pen&quot;</span><span class="p">]</span>
-
-<span class="c1"># Define resonator params</span>
 <span class="n">omega</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;omega&quot;</span><span class="p">]</span>
 <span class="n">Z</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">]</span>
 
@@ -202,12 +203,12 @@
 <span class="n">I</span> <span class="o">=</span> <span class="n">cpw</span><span class="o">.</span><span class="n">current</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span> <span class="c1"># Find the current</span>
 
 <span class="c1"># Generate a parameter list for COMSOL modelling</span>
-<span class="n">paramlist</span> <span class="o">=</span> <span class="n">setp</span><span class="o">.</span><span class="n">param_list</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">I</span><span class="p">,</span><span class="n">Jnorm</span><span class="p">)</span> <span class="c1"># Generate COMSOL parameter list</span>
+<span class="n">paramlist</span> <span class="o">=</span> <span class="n">setp</span><span class="o">.</span><span class="n">param_list</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">I</span><span class="p">,</span><span class="n">Jnorm</span><span class="p">,</span><span class="s1">&#39;paramlist.txt&#39;</span><span class="p">)</span> <span class="c1"># Generate COMSOL parameter list</span>
 
-<span class="n">currentDensityFile</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/data_preprocess/current_density.csv&quot;</span><span class="p">)</span>
+<span class="n">currentDensityFile</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/current_density.csv&quot;</span><span class="p">)</span>
 <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">currentDensityFile</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">Jnorm</span><span class="p">)),</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
 
-<span class="n">currentFile</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/data_preprocess/current.csv&quot;</span><span class="p">)</span>
+<span class="n">currentFile</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/current.csv&quot;</span><span class="p">)</span>
 <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">currentFile</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">I</span><span class="p">)),</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
 </pre></div>
 </div>

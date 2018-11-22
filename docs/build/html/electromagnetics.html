@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="SSH_Command" href="ssh_control.html" />
+    <link rel="next" title="PostProcData" href="ssh_control.html" />
     <link rel="prev" title="Help" href="help.html" /> 
 
   
@@ -99,11 +99,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#cpw">cpw</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="ssh_control.html">SSH_Command</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_processing.html">process_data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh_control.html">PostProcData</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_processing.html">data_processing</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="current_density.html">Preprocessing - Determine the Current Density</a></li>
+<li class="toctree-l1"><a class="reference internal" href="addremote.html">Adding a remote machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="remote_connection.html">Interfacing with a Remote Machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="single_spin_coupling.html">Postprocessing - Single Spin Coupling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="purcell_enhancement.html">Postprocessing - Purcell Enhancement</a></li>
@@ -179,6 +180,128 @@
 <p>This package contains the methods for calculating the electromagnetic properties of a cpw resonator. Of particular interest is the spatial distribution of the vacuum current fluctuations for a cpw of a given geometry.</p>
 <div class="section" id="cpw">
 <h2>cpw<a class="headerlink" href="#cpw" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="sd">&quot;&quot;&quot; This program wil calculate the electromagnetic properties of cpw resonators</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">sp</span>
+
+<span class="k">class</span> <span class="nc">CPW</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    CPW contains the methods for calculating electromagntic properties of cpw resonator</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;0.1&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">pen</span><span class="p">,</span><span class="n">Z</span><span class="p">,</span><span class="n">omega</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the cpw geometry, penetration depth, Z, resonant frequency, and voltage</span>
+
+<span class="sd">        :type x: float</span>
+<span class="sd">        :param x: width of substrate</span>
+
+<span class="sd">        :type l: int</span>
+<span class="sd">        :param l: length of superconductor</span>
+
+<span class="sd">        :type w: int</span>
+<span class="sd">        :param w: width of superconductor</span>
+
+<span class="sd">        :type t: int</span>
+<span class="sd">        :param t: thickness of superconductor</span>
+
+<span class="sd">        :type pen: int</span>
+<span class="sd">        :param pen: penetration depth of superconductor</span>
+
+<span class="sd">        :type Z: int</span>
+<span class="sd">        :param Z: characteristic impedance or cpw</span>
+
+<span class="sd">        :type omega: int</span>
+<span class="sd">        :param omega: resonant frequency</span>
+
+<span class="sd">        :type V: int</span>
+<span class="sd">        :param l: voltage</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l</span> <span class="o">=</span> <span class="n">l</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pen</span> <span class="o">=</span> <span class="n">pen</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">omega</span> <span class="o">=</span> <span class="n">omega</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">J</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates un-normalized vacuum current density</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">/</span><span class="mf">2.</span><span class="p">:</span>
+                <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">abs</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">/</span><span class="mf">2.</span><span class="p">:</span>
+                <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1.165</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">)</span><span class="o">**.</span><span class="mi">5</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">abs</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">/</span><span class="mf">2.</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">/</span><span class="mf">2.</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">):</span>
+                <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1.165</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">)</span><span class="o">**.</span><span class="mi">5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">/</span><span class="mf">2.</span> <span class="o">-</span> <span class="nb">abs</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**-.</span><span class="mi">5</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">normalize_J</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Normalizes vacuum current density</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#normalise</span>
+        <span class="n">Js</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">()</span>
+        <span class="n">dI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">omega</span><span class="o">*</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">hbar</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">Z</span><span class="p">))</span><span class="o">**.</span><span class="mi">5</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">Jnorm</span> <span class="o">=</span> <span class="n">dI</span><span class="o">*</span><span class="n">Js</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="o">*</span><span class="n">dx</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Js</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">Jnorm</span>
+
+    <span class="k">def</span> <span class="nf">current</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates critical current</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">norm</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;norm&#39;</span><span class="p">,</span><span class="s1">&#39;yes&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">norm</span><span class="o">==</span><span class="s1">&#39;yes&#39;</span><span class="p">:</span>
+            <span class="n">I</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">l</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize_J</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">I</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">l</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">I</span>
+
+    <span class="k">def</span> <span class="nf">resistance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        calculates resistance of superconductor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">R</span>
+
+    <span class="k">def</span> <span class="nf">resistivity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates resistivity of superconductor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span> <span class="n">w</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="c1"># Cross-sectional area of cpw</span>
+        <span class="n">rho</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resistance</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="n">A</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">rho</span>
+
+    <span class="k">def</span> <span class="nf">conductivity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates conductivity of superconductor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">resistivity</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">G</span>
+
+    <span class="k">def</span> <span class="nf">E</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates electroc field of supercodnuctor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize_J</span><span class="p">()</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">conductivity</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">E</span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -190,7 +313,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ssh_control.html" class="btn btn-neutral float-right" title="SSH_Command" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ssh_control.html" class="btn btn-neutral float-right" title="PostProcData" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="help.html" class="btn btn-neutral" title="Help" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

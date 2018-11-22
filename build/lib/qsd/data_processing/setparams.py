@@ -72,7 +72,7 @@ class SetParams:
         }
         return params
 
-    def param_list(self,x,I,Jnorm,file):
+    def param_list(self,x,I,Jnorm,paramfile):
         """
         Generates a text file which holds the parameters requiured for the COMSOL simulation
         """
@@ -91,9 +91,7 @@ class SetParams:
         w_sub = 4*self.w
         h_sub = 25e-06
 
-        paramFile = str(os.getcwd() + file)
-
-        f = open(paramFile,'w')
+        f = open(paramfile,'w')
         f.write('w ' + str(self.w) + '[m] width_of_superconductor\n'
            't ' + str(self.t) + '[m] thickness_of_superconductor\n'
            'pen ' + str(self.pen) + '[m] penetration_depth\n'

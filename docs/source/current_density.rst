@@ -5,38 +5,38 @@ The first thing which is required is to define the geometry of the cpw. In this 
 
 ::
 
-   import csv
-   from qsd.electromagnetics import cpw
-   from qsd.data_processing import setparams
-   
-   # Define geometry of the superconductor
-   setp = SetParams.SetParams()
-   params = setp.set_params()
-   w = params["w"]
-   t = params["t"]
-   l = params["l"]
-   pen = params["pen"]
+    import csv
+    import os
+    import numpy as np
+    from qsd.electromagnetics import cpw
+    from qsd.data_processing import setparams
 
-   # Define resonator params
-   omega = params["omega"]
-   Z = params["Z"]
+    # Define geometry of the superconductor
+    setp = setparams.SetParams()
+    params = setp.set_params("cpw_parameters.txt")
 
-   # Define the 'mesh'
-   x = np.linspace(-w, w, int(1e04))
+    w = params["w"]
+    t = params["t"]
+    l = params["l"]
+    pen = params["pen"]
+    omega = params["omega"]
+    Z = params["Z"]
 
-   # Instantiate Special CPW object
-   cpw = cpw.CPW(x,l,w,t,pen,Z,omega)
+    # Define the 'mesh'
+    x = np.linspace(-w, w, int(1e04))
 
-   Js = cpw.J() #s Current density - not normalised
-   Jnorm = cpw.normalize_J() # Normalise
-   I = cpw.current(norm='no') # Find the current
+    # Instantiate Special CPW object
+    cpw = cpw.CPW(x,l,w,t,pen,Z,omega)
 
-   # Generate a parameter list for COMSOL modelling
-   paramlist = setp.param_list(x,I,Jnorm) # Generate COMSOL parameter list
+    Js = cpw.J() #s Current density - not normalised
+    Jnorm = cpw.normalize_J() # Normalise
+    I = cpw.current(norm='no') # Find the current
 
-   currentDensityFile = str(os.getcwd() + "/data_preprocess/current_density.csv")
-   np.savetxt(currentDensityFile, np.column_stack((x,Jnorm)), delimiter=",")
+    # Generate a parameter list for COMSOL modelling
+    paramlist = setp.param_list(x,I,Jnorm,'paramlist.txt') # Generate COMSOL parameter list
 
-   currentFile = str(os.getcwd() + "/data_preprocess/current.csv")
-   np.savetxt(currentFile, np.column_stack((x,I)), delimiter=",")
+    currentDensityFile = str(os.getcwd() + "/current_density.csv")
+    np.savetxt(currentDensityFile, np.column_stack((x,Jnorm)), delimiter=",")
 
+    currentFile = str(os.getcwd() + "/current.csv")
+    np.savetxt(currentFile, np.column_stack((x,I)), delimiter=",")

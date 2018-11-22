@@ -86,6 +86,7 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Using the Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howitworks.html">How the COMSOL Simulation Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="todo.html">To Do List</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
@@ -94,12 +95,13 @@
 <li class="toctree-l1"><a class="reference internal" href="help.html">Help</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="vacuumflucs.html">vacuum_flucs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sshcommand.html">SSH_Command</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dataprocess.html">process_data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electromagnetics.html">electromagnetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh_control.html">PostProcData</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_processing.html">data_processing</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="current_density.html">Preprocessing - Determine the Current Density</a></li>
+<li class="toctree-l1"><a class="reference internal" href="addremote.html">Adding a remote machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="remote_connection.html">Interfacing with a Remote Machine</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Postprocessing - Single Spin Coupling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="purcell_enhancement.html">Postprocessing - Purcell Enhancement</a></li>
@@ -172,17 +174,16 @@
             
   <div class="section" id="postprocessing-single-spin-coupling">
 <h1>Postprocessing - Single Spin Coupling<a class="headerlink" href="#postprocessing-single-spin-coupling" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">process_data</span> <span class="k">import</span> <span class="n">ReadComsol</span><span class="p">,</span><span class="n">PostProcData</span>
+<span class="kn">from</span> <span class="nn">qsd.data_processing</span> <span class="k">import</span> <span class="n">readcomsol</span><span class="p">,</span><span class="n">postproc</span><span class="p">,</span><span class="n">setparams</span>
 
 <span class="c1"># Read data from downloads</span>
-<span class="n">file_dbx</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;/data_postprocess/downloads/exports/Bx_fullData.csv&#39;</span>
-<span class="n">file_dby</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;/data_postprocess/downloads/exports/By_fullData.csv&#39;</span>
+<span class="n">file_dbx</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;/downloads/exports/Bx_fullData.csv&#39;</span>
+<span class="n">file_dby</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;/downloads/exports/By_fullData.csv&#39;</span>
 
-<span class="n">rdx</span> <span class="o">=</span> <span class="n">ReadComsol</span><span class="o">.</span><span class="n">ReadComsol</span><span class="p">(</span><span class="n">file_dbx</span><span class="p">)</span>
-<span class="n">rdy</span> <span class="o">=</span> <span class="n">ReadComsol</span><span class="o">.</span><span class="n">ReadComsol</span><span class="p">(</span><span class="n">file_dby</span><span class="p">)</span>
+<span class="n">rdx</span> <span class="o">=</span> <span class="n">readcomsol</span><span class="o">.</span><span class="n">ReadComsol</span><span class="p">(</span><span class="n">file_dbx</span><span class="p">)</span>
+<span class="n">rdy</span> <span class="o">=</span> <span class="n">readcomsol</span><span class="o">.</span><span class="n">ReadComsol</span><span class="p">(</span><span class="n">file_dby</span><span class="p">)</span>
 
 <span class="c1"># Read csv file, and get x,y annd dbx/dby data for each</span>
 <span class="c1"># blocked point in space</span>
@@ -192,8 +193,19 @@
 <span class="n">dbx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">bx_z</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
 <span class="n">dby</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">by_z</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
 
+<span class="c1"># Define geometry of the superconductor</span>
+<span class="n">setp</span> <span class="o">=</span> <span class="n">setparams</span><span class="o">.</span><span class="n">SetParams</span><span class="p">()</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">setp</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="s2">&quot;cpw_parameters.txt&quot;</span><span class="p">)</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;w&quot;</span><span class="p">]</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">]</span>
+<span class="n">l</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;l&quot;</span><span class="p">]</span>
+<span class="n">pen</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;pen&quot;</span><span class="p">]</span>
+<span class="n">omega</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;omega&quot;</span><span class="p">]</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">]</span>
+
 <span class="c1"># Postprocess data</span>
-<span class="n">post</span> <span class="o">=</span> <span class="n">PostProcData</span><span class="o">.</span><span class="n">PostProcData</span><span class="p">()</span>
+<span class="n">post</span> <span class="o">=</span> <span class="n">postproc</span><span class="o">.</span><span class="n">PostProc</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">pen</span><span class="p">,</span><span class="n">omega</span><span class="p">,</span><span class="n">Z</span><span class="p">)</span>
 
 <span class="c1"># Single spin coupling for each point on mesh grid</span>
 <span class="n">g</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">coupling</span><span class="p">(</span><span class="n">dbx</span><span class="p">,</span><span class="n">dby</span><span class="p">,</span><span class="n">theta</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
