@@ -6,6 +6,7 @@ Postprocessing - Purcell Enhancement for a Cut Line
     #!/usr/bin/env python
     from qsd.data_processing import readcomsol,postproc
     import numpy as np
+    from scipy import constants as sp
     import os
 
     #read in 1d data from comsol for plotting
