@@ -4,7 +4,7 @@ data_processing
 preproc
 ^^^^^^^
 .. automodule:: qsd.data_processing.preproc
-    :members:
+  :members:
 
 ::
 
@@ -27,7 +27,7 @@ preproc
 setparams
 ^^^^^^^^^
 .. automodule:: qsd.data_processing.setparams
-    :members:
+  :members:
 
 ::
 
@@ -146,7 +146,7 @@ setparams
 readcomsol
 ^^^^^^^^^^
 .. automodule:: qsd.data_processing.readcomsol
-    :members:
+   :members:
 
 ::
 
@@ -227,7 +227,7 @@ postproc
 ^^^^^^^^
 
 .. automodule:: qsd.data_processing.postproc
-    :members:
+   :members:
 
  ::
 
