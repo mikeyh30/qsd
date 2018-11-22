@@ -39,6 +39,7 @@ The following examples show how to use the package in order to generate a cpw ge
    :maxdepth: 2
 
    current_density
+   addremote
    remote_connection
    single_spin_coupling
    purcell_enhancement

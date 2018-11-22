@@ -101,6 +101,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="current_density.html">Preprocessing - Determine the Current Density</a></li>
+<li class="toctree-l1"><a class="reference internal" href="addremote.html">Adding a remote machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="remote_connection.html">Interfacing with a Remote Machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="single_spin_coupling.html">Postprocessing - Single Spin Coupling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="purcell_enhancement.html">Postprocessing - Purcell Enhancement</a></li>
@@ -173,6 +174,61 @@
             
   <div class="section" id="module-qsd.ssh_control.sshcommand">
 <span id="postprocdata"></span><h1>PostProcData<a class="headerlink" href="#module-qsd.ssh_control.sshcommand" title="Permalink to this headline">¶</a></h1>
+<p>sshcommand includes all of the necessary functions to interface with remote machines via the ssh protocol</p>
+<dl class="class">
+<dt id="qsd.ssh_control.sshcommand.SSHCommand">
+<em class="property">class </em><code class="descclassname">qsd.ssh_control.sshcommand.</code><code class="descname">SSHCommand</code><span class="sig-paren">(</span><em>host</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.ssh_control.sshcommand.SSHCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>SSHCommand contains the necessary functions to generate bash files which create the ssh interfaces to remote machines</p>
+<dl class="method">
+<dt id="qsd.ssh_control.sshcommand.SSHCommand.add_remote_machine">
+<code class="descname">add_remote_machine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.ssh_control.sshcommand.SSHCommand.add_remote_machine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new remote machine to your ssh config file, and gennerate a secure key to share bnetyween your computer and the host machine.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.ssh_control.sshcommand.SSHCommand.call_bash">
+<code class="descname">call_bash</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.ssh_control.sshcommand.SSHCommand.call_bash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to call created bash scripts with the subprocess module</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.ssh_control.sshcommand.SSHCommand.check_host_machine">
+<code class="descname">check_host_machine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.ssh_control.sshcommand.SSHCommand.check_host_machine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the file structure of the host machine to make sure that the necessary structure is created. If it hasn;t been previously, this script will create the necessary files and folders.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.ssh_control.sshcommand.SSHCommand.get_comsol_data">
+<code class="descname">get_comsol_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.ssh_control.sshcommand.SSHCommand.get_comsol_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve exported data from remote machine</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.ssh_control.sshcommand.SSHCommand.job">
+<code class="descname">job</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.ssh_control.sshcommand.SSHCommand.job" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a batch job script on the remote machine to run COMSOL</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.ssh_control.sshcommand.SSHCommand.run_comsol">
+<code class="descname">run_comsol</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.ssh_control.sshcommand.SSHCommand.run_comsol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run COMSOL on the remote machine</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.ssh_control.sshcommand.SSHCommand.upload_data">
+<code class="descname">upload_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.ssh_control.sshcommand.SSHCommand.upload_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload data to the remote machine</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.ssh_control.sshcommand.SSHCommand.upload_job_script">
+<code class="descname">upload_job_script</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.ssh_control.sshcommand.SSHCommand.upload_job_script" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload the batch job script to the remote machine</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 

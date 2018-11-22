@@ -1,10 +1,37 @@
 #!/usr/bin/env python
+"""
+sshcommand includes all of the necessary functions to interface with remote machines via the ssh protocol
+"""
+
 from subprocess import call
 import os
 import stat
 
 class SSHCommand:
+    """
+        SSHCommand contains the necessary functions to generate bash files which create the ssh interfaces to remote machines
+    """
     def __init__(self,host,*args,**kwargs):
+        """
+            :type: host = str
+            :param: host = name of the machine you want to connect to
+
+            :type: host_network str
+            :param: host_network = network address of the remote machine
+
+            :type: full_host = str
+            :param: full_host = full network address, including host
+
+            :type: user = str
+            :param: user = username 
+
+            :type: model = str
+            :param: model = COMSOL model name
+
+            :type: paramfile = str
+            :param: paramfile = file containing parameters for COMSOL simulation
+
+        """
         self.host = host
         self.host_network = kwargs('host_network',None) 
         self.full_host = self.host + "@" + self.full_host
@@ -14,7 +41,9 @@ class SSHCommand:
         return
 
     def add_remote_machine(self):
-
+        """
+            Add a new remote machine to your ssh config file, and gennerate a secure key to share bnetyween your computer and the host machine.
+        """
         file = open("keygen","w")
         file.write("#!/bin/bash")
         file.write("cd ~/.ssh\n")
@@ -35,6 +64,9 @@ class SSHCommand:
         self.call_bash(sshfile)
 
     def upload_data(self):
+        """
+            Upload data to the remote machine
+        """
         print("Uploading data to remote machine")
         
         filename = "upload_data" 
@@ -47,6 +79,9 @@ class SSHCommand:
         self.call_bash(filename)
 
     def run_comsol(self):
+        """
+            Run COMSOL on the remote machine
+        """
         print("Running COMSOL on remote machine...")
     
         filename = "run_comsol"
@@ -61,6 +96,9 @@ class SSHCommand:
         self.call_bash(filename)
    
     def check_host_machine(self):
+        """
+            Check the file structure of the host machine to make sure that the necessary structure is created. If it hasn;t been previously, this script will create the necessary files and folders.
+        """
         print("Checking host machine file structure")
 
         filename = "check_host"
@@ -93,6 +131,9 @@ class SSHCommand:
         self.call_bash(filename)
     
     def get_comsol_data(self):
+        """
+            Retrieve exported data from remote machine
+        """
         print("Retrieving comsol datafiles...")
         
         down_dir = os.path.join(os.getcwd(), "downloads")
@@ -112,6 +153,9 @@ class SSHCommand:
         self.call_bash(filename)
 
     def upload_job_script(self):
+        """
+            Upload the batch job script to the remote machine
+        """
         self.job()
         print("Uploading job script....")
         filename = "upload_job"
@@ -126,6 +170,9 @@ class SSHCommand:
         os.remove('job')
 
     def job(self):
+        """
+            Creates a batch job script on the remote machine to run COMSOL
+        """
         filename = "job"
         filedir = os.getcwd() + "/" + filename
         file = open(filename,"w")
@@ -159,6 +206,9 @@ class SSHCommand:
         file.write("mv on.* output/\n")
 
     def call_bash(self,filename):
+        """
+            Method to call created bash scripts with the subprocess module
+        """
         st = os.stat(filename)
         os.chmod(filename, st.st_mode | stat.S_IEXEC)
         callname = './'+filename

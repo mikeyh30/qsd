@@ -25,7 +25,9 @@ There is a specific workflow which must be adhered to in order to use the packag
 
    This would remoteley give you access to the machine from your own computer. This package does all of this for you. When you first use the package, you will need to specify your username annd the host network (ee.ucl.ac.uk), and the ssh_command library includes functionality to gennerate a secure ssh key and upload this to the host computer.
 
-4. The remote_interface script will copy the parameter list to the remote machine, update a predefined COMSOL script with the new parameters, remotely run COMSOL, and retrieve the data back to your computer.
+4. You may find it useful to add a remote machine to your ssh config file. This makes life a lot easier when transferring the files and interfacing with a remote machine. An example of how to do this is given in the example "Adding a remote machine"
+   
+5. The remote_interface script will copy the parameter list to the remote machine, update a predefined COMSOL script with the new parameters, remotely run COMSOL, and retrieve the data back to your computer.
 
-5. With the data now retrieved, you can post-process the data to determine certain figures of merit. See the post-processing examples.
+6. With the data now retrieved, you can post-process the data to determine certain figures of merit. See the post-processing examples.
 
