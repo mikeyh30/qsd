@@ -6,8 +6,8 @@ The first thing which is required is to define the geometry of the cpw. In this 
 ::
 
    import csv
-   from vacuum_flucs import CPW
-   from process_data import SetParams
+   from qsd.electromagnetics import cpw
+   from qsd.data_processing import setparams
    
    # Define geometry of the superconductor
    setp = SetParams.SetParams()
@@ -25,7 +25,7 @@ The first thing which is required is to define the geometry of the cpw. In this 
    x = np.linspace(-w, w, int(1e04))
 
    # Instantiate Special CPW object
-   cpw = CPW.CPW(x,l,w,t,pen,Z,omega)
+   cpw = cpw.CPW(x,l,w,t,pen,Z,omega)
 
    Js = cpw.J() #s Current density - not normalised
    Jnorm = cpw.normalize_J() # Normalise

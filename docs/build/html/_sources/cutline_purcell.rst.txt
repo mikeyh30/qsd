@@ -4,14 +4,14 @@ Postprocessing - Purcell Enhancement for a Cut Line
 ::
 
    #!/usr/bin/env python
-   from process_data import ReadComsol,PostProcData
+   from qsd.data_processing import readcomsol,postproc
    import numpy as np
    from scipy import constants as sp
 
    #read in 1d data from comsol for plotting
-   bx = ReadComsol.ReadComsol('comsol_datafiles/Bx.csv')
-   by = ReadComsol.ReadComsol('comsol_datafiles/By.csv')
-   bn = ReadComsol.ReadComsol('comsol_datafiles/normB.csv')
+   bx = readcomsol.ReadComsol('comsol_datafiles/Bx.csv')
+   by = readcomsol.ReadComsol('comsol_datafiles/By.csv')
+   bn = readcomsol.ReadComsol('comsol_datafiles/normB.csv')
 
    xx,Bx = bx.read_1D_comsol_data()
    xy,By = by.read_1D_comsol_data()
