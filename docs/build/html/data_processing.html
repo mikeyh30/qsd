@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Preprocessing - Determine the Current Density" href="current_density.html" />
-    <link rel="prev" title="ssh_Control" href="ssh_control.html" /> 
+    <link rel="prev" title="ssh_control" href="ssh_control.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -96,17 +96,18 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="electromagnetics.html">electromagnetics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ssh_control.html">ssh_Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh_control.html">ssh_control</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">data_processing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#setparams">SetParams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#preprocdata">PreProcData</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#readcomsol">ReadComsol</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#postprocdata">PostProcData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-qsd.data_processing.preproc">preproc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-qsd.data_processing.setparams">setparams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-qsd.data_processing.readcomsol">readcomsol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#postproc">postproc</a></li>
 </ul>
 </li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="current_density.html">Preprocessing - Determine the Current Density</a></li>
+<li class="toctree-l1"><a class="reference internal" href="addremote.html">Adding a remote machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="remote_connection.html">Interfacing with a Remote Machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="single_spin_coupling.html">Postprocessing - Single Spin Coupling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="purcell_enhancement.html">Postprocessing - Purcell Enhancement</a></li>
@@ -179,17 +180,277 @@
             
   <div class="section" id="data-processing">
 <h1>data_processing<a class="headerlink" href="#data-processing" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="setparams">
-<h2>SetParams<a class="headerlink" href="#setparams" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-qsd.data_processing.preproc">
+<span id="preproc"></span><h2>preproc<a class="headerlink" href="#module-qsd.data_processing.preproc" title="Permalink to this headline">¶</a></h2>
+<p>Method to upload data to remote machine</p>
+<dl class="class">
+<dt id="qsd.data_processing.preproc.PreProc">
+<em class="property">class </em><code class="descclassname">qsd.data_processing.preproc.</code><code class="descname">PreProc</code><a class="headerlink" href="#qsd.data_processing.preproc.PreProc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preprocessing methods</p>
+<dl class="method">
+<dt id="qsd.data_processing.preproc.PreProc.upload_data">
+<code class="descname">upload_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.preproc.PreProc.upload_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload data to remote machine</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Method to upload data to remote machine</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">subprocess</span> <span class="k">import</span> <span class="n">call</span>
+
+<span class="k">class</span> <span class="nc">PreProc</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Preprocessing methods</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">upload_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Upload data to remote machine</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rc</span> <span class="o">=</span> <span class="n">call</span><span class="p">(</span><span class="s2">&quot;./upload_data&quot;</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="section" id="preprocdata">
-<h2>PreProcData<a class="headerlink" href="#preprocdata" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="readcomsol">
-<h2>ReadComsol<a class="headerlink" href="#readcomsol" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-qsd.data_processing.setparams">
+<span id="setparams"></span><h2>setparams<a class="headerlink" href="#module-qsd.data_processing.setparams" title="Permalink to this headline">¶</a></h2>
+<p>This program sets the parameters required for simulation.</p>
+<dl class="class">
+<dt id="qsd.data_processing.setparams.SetParams">
+<em class="property">class </em><code class="descclassname">qsd.data_processing.setparams.</code><code class="descname">SetParams</code><a class="headerlink" href="#qsd.data_processing.setparams.SetParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class allows a user to set the relevant parameters of the cpw. This needs refactorinng, but is sufficient for now.</p>
+<dl class="method">
+<dt id="qsd.data_processing.setparams.SetParams.param_list">
+<code class="descname">param_list</code><span class="sig-paren">(</span><em>x</em>, <em>I</em>, <em>Jnorm</em>, <em>paramfile</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.setparams.SetParams.param_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a text file which holds the parameters requiured for the COMSOL simulation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.setparams.SetParams.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>infile</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.setparams.SetParams.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns simulation parameters as a dictionary</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This program sets the parameters required for simulation.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">subprocess</span> <span class="k">import</span> <span class="n">call</span>
+
+<span class="k">class</span> <span class="nc">SetParams</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This class allows a user to set the relevant parameters of the cpw. This needs refactorinng, but is sufficient for now.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Initialize with parameters</span>
+
+<span class="sd">            :type w: float</span>
+<span class="sd">            :param w: width of substrate</span>
+
+<span class="sd">            :type t: float</span>
+<span class="sd">            :param t: thickness of superconductor</span>
+
+<span class="sd">            :type l: float</span>
+<span class="sd">            :param l: length of supercondducting wire</span>
+
+<span class="sd">            :type pen: float</span>
+<span class="sd">            :param pen: penetration depth</span>
+
+<span class="sd">            :type omega: float</span>
+<span class="sd">            :param omega: cavity resonant frequency</span>
+
+<span class="sd">            :type Z: float</span>
+<span class="sd">            :param w: characteristic impedance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pen</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">omega</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Z</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">def</span> <span class="nf">set_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">infile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns simulation parameters as a dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Define geometry of the superconductor</span>
+        <span class="n">paramfile</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+        <span class="n">filestring</span> <span class="o">=</span> <span class="n">paramfile</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">filelist</span> <span class="o">=</span> <span class="n">filestring</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">pd</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">fl</span> <span class="ow">in</span> <span class="n">filelist</span><span class="p">:</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="n">fl</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="n">pd</span><span class="p">[</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">paramfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">pd</span><span class="p">[</span><span class="s2">&quot;w&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">pd</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">pd</span><span class="p">[</span><span class="s2">&quot;l&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pen</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">pd</span><span class="p">[</span><span class="s2">&quot;pen&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">omega</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">pd</span><span class="p">[</span><span class="s2">&quot;omega&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Z</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">pd</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">])</span>
+
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;w&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">,</span>
+            <span class="s1">&#39;t&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">,</span>
+            <span class="s1">&#39;l&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="p">,</span>
+            <span class="s1">&#39;pen&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="p">,</span>
+            <span class="s1">&#39;omega&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">omega</span><span class="p">,</span>
+            <span class="s1">&#39;Z&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">Z</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">params</span>
+
+    <span class="k">def</span> <span class="nf">param_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">I</span><span class="p">,</span><span class="n">Jnorm</span><span class="p">,</span><span class="n">paramfile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a text file which holds the parameters requiured for the COMSOL simulation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+
+        <span class="n">I0</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">J0</span> <span class="o">=</span> <span class="n">I0</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="p">)</span>
+        <span class="n">pen_perp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.506</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pen_perp</span><span class="p">)))</span><span class="o">**</span><span class="mf">0.75</span>
+        <span class="n">l1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="o">/</span><span class="n">pen_perp</span><span class="p">)</span>
+        <span class="n">l2</span> <span class="o">=</span> <span class="mf">0.774</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">pen_perp</span> <span class="o">+</span> <span class="mf">0.5152</span><span class="o">*</span><span class="n">pen_perp</span>
+        <span class="n">J2overJ1</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.008</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">/</span><span class="n">pen_perp</span><span class="o">/</span>
+            <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">pen_perp</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">pen</span> <span class="o">-</span> <span class="mf">0.08301</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="o">/</span><span class="n">pen_perp</span><span class="p">)))</span>
+        <span class="n">J1</span> <span class="o">=</span> <span class="n">Jnorm</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">w_sub</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span>
+        <span class="n">h_sub</span> <span class="o">=</span> <span class="mf">25e-06</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">paramfile</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;w &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;[m] width_of_superconductor</span><span class="se">\n</span><span class="s1">&#39;</span>
+           <span class="s1">&#39;t &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;[m] thickness_of_superconductor</span><span class="se">\n</span><span class="s1">&#39;</span>
+           <span class="s1">&#39;pen &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;[m] penetration_depth</span><span class="se">\n</span><span class="s1">&#39;</span>
+           <span class="s1">&#39;I0 &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">I0</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;[A/m] current_at_x=0</span><span class="se">\n</span><span class="s1">&#39;</span>
+           <span class="s1">&#39;J0 &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">J0</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;[A/m^3] current_density_at_x=0</span><span class="se">\n</span><span class="s1">&#39;</span>
+           <span class="s1">&#39;N &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+           <span class="s1">&#39;w_sub &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">w_sub</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;[m] substrate_width</span><span class="se">\n</span><span class="s1">&#39;</span>
+           <span class="s1">&#39;h_sub &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">h_sub</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;[m] substrate_height</span><span class="se">\n</span><span class="s1">&#39;</span>
+           <span class="s1">&#39;pen_perp &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pen_perp</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;[m] perpendicular_pen_depth</span><span class="se">\n</span><span class="s1">&#39;</span>
+           <span class="s1">&#39;C &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; capacitance</span><span class="se">\n</span><span class="s1">&#39;</span>
+           <span class="s1">&#39;l1 &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;[m]</span><span class="se">\n</span><span class="s1">&#39;</span>
+           <span class="s1">&#39;l2 &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">l2</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;[m]</span><span class="se">\n</span><span class="s1">&#39;</span>
+           <span class="s1">&#39;J2overJ1 &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">J2overJ1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+           <span class="s1">&#39;J1 &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">J1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;[A/m]&#39;</span>
+           <span class="p">)</span>
+
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
 </div>
-<div class="section" id="postprocdata">
-<h2>PostProcData<a class="headerlink" href="#postprocdata" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-qsd.data_processing.readcomsol">
+<span id="readcomsol"></span><h2>readcomsol<a class="headerlink" href="#module-qsd.data_processing.readcomsol" title="Permalink to this headline">¶</a></h2>
+<p>Methods for reading data from COMSOL</p>
+<dl class="class">
+<dt id="qsd.data_processing.readcomsol.ReadComsol">
+<em class="property">class </em><code class="descclassname">qsd.data_processing.readcomsol.</code><code class="descname">ReadComsol</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.readcomsol.ReadComsol" title="Permalink to this definition">¶</a></dt>
+<dd><p>ReadComsol contains methods for reading datafiles from COMSOL</p>
+<dl class="method">
+<dt id="qsd.data_processing.readcomsol.ReadComsol.read_1D_comsol_data">
+<code class="descname">read_1D_comsol_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.readcomsol.ReadComsol.read_1D_comsol_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read 1D COMSOL datafiles</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.readcomsol.ReadComsol.read_2D_comsol_data">
+<code class="descname">read_2D_comsol_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.readcomsol.ReadComsol.read_2D_comsol_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read 2D COMSOL datafiles</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.readcomsol.ReadComsol.read_full_data">
+<code class="descname">read_full_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.readcomsol.ReadComsol.read_full_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read full COMSOL datafiles</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Methods for reading data from COMSOL</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">subprocess</span> <span class="k">import</span> <span class="n">call</span>
+
+<span class="k">class</span> <span class="nc">ReadComsol</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ReadComsol contains methods for reading datafiles from COMSOL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Initialize with COMSOL file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span>
+
+    <span class="k">def</span> <span class="nf">read_1D_comsol_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Read 1D COMSOL datafiles</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">y</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rf</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">rf</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">((</span><span class="n">x</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">((</span><span class="n">y</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span>
+
+    <span class="k">def</span> <span class="nf">read_2D_comsol_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Read 2D COMSOL datafiles</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">y</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">z</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rf</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">rf</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">((</span><span class="n">x</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">((</span><span class="n">y</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">((</span><span class="n">z</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span>
+
+        <span class="k">def</span> <span class="nf">read_full_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Read full COMSOL datafiles</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">y</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">z</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rf</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">rf</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="c1"># Remove header from csv file, if it exists</span>
+                <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;%&#39;</span><span class="p">:</span>
+                    <span class="n">x</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="postproc">
+<h2>postproc<a class="headerlink" href="#postproc" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -204,7 +465,7 @@
         <a href="current_density.html" class="btn btn-neutral float-right" title="Preprocessing - Determine the Current Density" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ssh_control.html" class="btn btn-neutral" title="ssh_Control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ssh_control.html" class="btn btn-neutral" title="ssh_control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
