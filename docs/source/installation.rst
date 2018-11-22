@@ -12,6 +12,6 @@ This package has several dependencies. First, you must install numpy adnd scipy.
 
 To install QSDCalcs, open type the command::
 
-    pip install qsd
+    pip install -i https://test.pypi.org/simple/ qsd
 
 This will download the package to your computer. Next, you will need to download the COMSOL .mph file. This file is hosted at https://github.com/garethsion/qsd/blob/master/qsd/tests/cpw_vacuum_calcs.mph . Download this to your working directory.
