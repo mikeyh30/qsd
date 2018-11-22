@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PostProcData &mdash; qsd 0.01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> qsd
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.01
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Using the Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howitworks.html">How the COMSOL Simulation Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">To Do List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html#contact">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Help</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="electromagnetics.html">electromagnetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh_control.html">ssh_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_processing.html">data_processing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="current_density.html">Preprocessing - Determine the Current Density</a></li>
+<li class="toctree-l1"><a class="reference internal" href="remote_connection.html">Interfacing with a Remote Machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="single_spin_coupling.html">Postprocessing - Single Spin Coupling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="purcell_enhancement.html">Postprocessing - Purcell Enhancement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pulse_fidelity.html">Postprocessing - Pi Pulse Fidelity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cutline_single_spin.html">Postprocessing - Single Spin Coupling for a Cut Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cutline_purcell.html">Postprocessing - Purcell Enhancement for a Cut Line</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">qsd</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>PostProcData</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/postproc.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-qsd.data_processing.postproc">
+<span id="postprocdata"></span><h1>PostProcData<a class="headerlink" href="#module-qsd.data_processing.postproc" title="Permalink to this headline">¶</a></h1>
+<p>This program allows a user to determine certain figures of merit of interest for cpw resonators for quantum spin dynamics.</p>
+<dl class="class">
+<dt id="qsd.data_processing.postproc.PostProc">
+<em class="property">class </em><code class="descclassname">qsd.data_processing.postproc.</code><code class="descname">PostProc</code><span class="sig-paren">(</span><em>w</em>, <em>t</em>, <em>l</em>, <em>pen</em>, <em>omega</em>, <em>Z</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contains methods for calculating various figures of merit for cpw</p>
+<dl class="method">
+<dt id="qsd.data_processing.postproc.PostProc.B1">
+<code class="descname">B1</code><span class="sig-paren">(</span><em>dbx</em>, <em>dby</em>, <em>theta</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc.B1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates total B1 field</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.postproc.PostProc.average_photon_number">
+<code class="descname">average_photon_number</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc.average_photon_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates average photon number</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.postproc.PostProc.cooperativity">
+<code class="descname">cooperativity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc.cooperativity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates cooperativity</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.postproc.PostProc.coupling">
+<code class="descname">coupling</code><span class="sig-paren">(</span><em>dbx</em>, <em>dby</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc.coupling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates coupling constant g, &lt;m|Sx|m&gt; * ue * sqrt(dby^2 + cos(theta) dbx^2)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.postproc.PostProc.cut_line_single_spin_coupling">
+<code class="descname">cut_line_single_spin_coupling</code><span class="sig-paren">(</span><em>Bx</em>, <em>By</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc.cut_line_single_spin_coupling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the single spin coupling for a given grid area</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.postproc.PostProc.cut_line_spin_density">
+<code class="descname">cut_line_spin_density</code><span class="sig-paren">(</span><em>g</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc.cut_line_spin_density" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the spin density for cut line section</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.postproc.PostProc.distribution">
+<code class="descname">distribution</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>param</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc.distribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate histogram</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.postproc.PostProc.finesse">
+<code class="descname">finesse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc.finesse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates finesse</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.postproc.PostProc.larmor_density">
+<code class="descname">larmor_density</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>theta_larmor</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc.larmor_density" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates distribution of Larmor frequency</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.postproc.PostProc.larmor_omega">
+<code class="descname">larmor_omega</code><span class="sig-paren">(</span><em>B</em>, <em>gamma</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc.larmor_omega" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates larmor precession frequency</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.postproc.PostProc.larmor_theta">
+<code class="descname">larmor_theta</code><span class="sig-paren">(</span><em>omega_larmor</em>, <em>tau</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc.larmor_theta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates angle of larmor precession</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.postproc.PostProc.ncell">
+<code class="descname">ncell</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>param</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc.ncell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of cells in resonator</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.postproc.PostProc.purcell_density">
+<code class="descname">purcell_density</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>gamma</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc.purcell_density" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates distribution of purcell rate in resomator</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.postproc.PostProc.purcell_factor">
+<code class="descname">purcell_factor</code><span class="sig-paren">(</span><em>lambda_c</em>, <em>n</em>, <em>Q</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc.purcell_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the Purcell enhancement induced by the cavity</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.postproc.PostProc.purcell_rate">
+<code class="descname">purcell_rate</code><span class="sig-paren">(</span><em>g</em>, <em>Q</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc.purcell_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the Purcell rate</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.postproc.PostProc.spin_density">
+<code class="descname">spin_density</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>g</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.postproc.PostProc.spin_density" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates distribution of spins in resonator</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Gareth Sion Jones
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'0.01',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

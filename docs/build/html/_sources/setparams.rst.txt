@@ -1,5 +1,5 @@
 PostProcData
 ============
 
-.. automodule:: SetParams
+.. automodule:: qsd.data_processing.setparams
    :members:

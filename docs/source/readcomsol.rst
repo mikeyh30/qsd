@@ -1,5 +1,5 @@
 PostProcData
 ============
 
-.. automodule:: process_data.ReadComsol
+.. automodule:: qsd.data_processing.readcomsol
    :members:

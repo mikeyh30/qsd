@@ -3,19 +3,20 @@ Postprocessing - Purcell Enhancement
 
 ::
 
+    #!/usr/bin/env python
 
     from scipy import constants as sp
     import os
     import numpy as np
     from matplotlib import pyplot as plt
-    from process_data import ReadComsol,PostProcData
+    from qsd.data_processing import readcomsol,postproc,setparams
 
     # Read data from downloads
-    file_dbx = os.getcwd() + '/data_postprocess/downloads/exports/Bx_fullData.csv'
-    file_dby = os.getcwd() + '/data_postprocess/downloads/exports/By_fullData.csv'
+    file_dbx = os.getcwd() + '/downloads/exports/Bx_fullData.csv'
+    file_dby = os.getcwd() + '/downloads/exports/By_fullData.csv'
 
-    rdx = ReadComsol.ReadComsol(file_dbx)
-    rdy = ReadComsol.ReadComsol(file_dby)
+    rdx = readcomsol.ReadComsol(file_dbx)
+    rdy = readcomsol.ReadComsol(file_dby)
 
     # Read csv file, and get x,y annd dbx/dby data for each
     # blocked point in space
@@ -25,20 +26,24 @@ Postprocessing - Purcell Enhancement
     dbx = np.asarray(bx_z).astype(np.float)
     dby = np.asarray(by_z).astype(np.float)
 
+    # # Define geometry of the superconductor
+    setp = setparams.SetParams()
+    params = setp.set_params("cpw_parameters.txt")
+
+    w = params["w"]
+    t = params["t"]
+    l = params["l"]
+    pen = params["pen"]
+    omega = params["omega"]
+    Z = params["Z"]
+
     # Postprocess data
-    post = PostProcData.PostProcData()
+    post = postproc.PostProc(w,t,l,pen,omega,Z)
 
-    # Calculate Purcell enhancement at each grid point
-    Q = 10000 # Q factor - for now typed in, but will be found from CST calcs ultimately
-    purcell = post.purcell_rate(g,Q)
-    pdens, pedge = post.purcell_density(bx_x,bx_y,purcell) # density
+    # Single spin coupling for each point on mesh grid
+    g = post.coupling(dbx,dby,theta=0)
+    hist, edges = post.spin_density(bx_x,bx_y,g) # density
 
-    # Weight by contribution to signal
-    g_weight = np.zeros(len(pedge))
-    for i in range (0,len(pedge)-1):
-        g_weight[i] = sum(g[np.where(np.logical_and(purcell>=pedge[i], purcell<=pedge[i+1]))])
-
-    rho_weighted = pdens * g_weight**2
-
-    plt.plot(pedge,rho_weighted)
+    plt.plot(edges,hist)
     plt.show()
+

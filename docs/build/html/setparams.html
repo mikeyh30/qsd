@@ -84,6 +84,7 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Using the Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howitworks.html">How the COMSOL Simulation Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="todo.html">To Do List</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
@@ -92,9 +93,9 @@
 <li class="toctree-l1"><a class="reference internal" href="help.html">Help</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="vacuumflucs.html">vacuum_flucs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sshcommand.html">SSH_Command</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dataprocess.html">process_data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electromagnetics.html">electromagnetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh_control.html">ssh_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_processing.html">data_processing</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="current_density.html">Preprocessing - Determine the Current Density</a></li>
@@ -168,8 +169,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="postprocdata">
-<h1>PostProcData<a class="headerlink" href="#postprocdata" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-qsd.data_processing.setparams">
+<span id="postprocdata"></span><h1>PostProcData<a class="headerlink" href="#module-qsd.data_processing.setparams" title="Permalink to this headline">¶</a></h1>
+<p>This program sets the parameters required for simulation.</p>
+<dl class="class">
+<dt id="qsd.data_processing.setparams.SetParams">
+<em class="property">class </em><code class="descclassname">qsd.data_processing.setparams.</code><code class="descname">SetParams</code><a class="headerlink" href="#qsd.data_processing.setparams.SetParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class allows a user to set the relevant parameters of the cpw. This needs refactorinng, but is sufficient for now.</p>
+<dl class="method">
+<dt id="qsd.data_processing.setparams.SetParams.param_list">
+<code class="descname">param_list</code><span class="sig-paren">(</span><em>x</em>, <em>I</em>, <em>Jnorm</em>, <em>file</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.setparams.SetParams.param_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a text file which holds the parameters requiured for the COMSOL simulation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qsd.data_processing.setparams.SetParams.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>infile</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.data_processing.setparams.SetParams.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns simulation parameters as a dictionary</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 

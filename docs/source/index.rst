@@ -14,6 +14,7 @@ Guide
    overview
    installation
    usage
+   howitworks
    todo
    gallery
    resources
@@ -26,9 +27,9 @@ Package Library Classes
 .. toctree::
    :maxdepth: 3
 
-   vacuumflucs
-   sshcommand
-   dataprocess
+   electromagnetics
+   ssh_control
+   data_processing
 
 Examples
 ^^^^^^^^

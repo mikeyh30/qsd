@@ -13,20 +13,27 @@ class PostProc:
     """
     Contains methods for calculating various figures of merit for cpw
     """
-    def __init__(self):
+    def __init__(self,w,t,l,pen,omega,Z):
         """
         Initializes resonator structure
         """
-        setp = setparams.SetParams()
-        params = setp.set_params()
-        self.w = params["w"]
-        self.t = params["t"]
-        self.l = params["l"]
-        self.pen = params["pen"]
+        #setp = setparams.SetParams()
+        #params = setp.set_params()
+        #self.w = params["w"]
+        #self.t = params["t"]
+        #self.l = params["l"]
+        #self.pen = params["pen"]
 
         #define the resonator - from CST or experiment
-        self.omega = params["omega"]
-        self.Z = params["Z"]
+        #self.omega = params["omega"]
+        #self.Z = params["Z"]
+        self.w = w
+        self.t = t
+        self.l = l
+        self.pen = pen
+        self.omega = omega
+        self.Z = Z
+        
         self.g = None
 
         self.volume_cell = None

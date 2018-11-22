@@ -6,16 +6,25 @@ import qsd
 import os
 
 # Define geometry of the superconductor
-setp = qsd.data_processing.setparams.SetParams()
-params = setp.set_params()
-w = params["w"]
-t = params["t"]
-l = params["l"]
-pen = params["pen"]
+paramfile=open("cpw_parameters.txt","r")
+filestring = paramfile.read()
+filelist = filestring.split("\n")
 
-# Define resonator params
-omega = params["omega"]
-Z = params["Z"]
+pd = {}
+for fl in filelist:
+    l = fl.split()
+    pd[l[0]] = l[2]
+paramfile.close()
+
+w = float(pd["w"])
+t = float(pd["t"])
+l = float(pd["l"])
+pen = float(pd["pen"])
+omega = float(pd["omega"])
+Z = float(pd["Z"])
+
+setp = qsd.data_processing.setparams.SetParams(w,t,l,pen,omega,Z)
+params = setp.set_params()
 
 # Define the 'mesh'
 x = np.linspace(-w, w, int(1e04))

@@ -1,4 +1,4 @@
 CPW
 ===
-.. automodule:: CPW
+.. automodule:: cpw
    :members:

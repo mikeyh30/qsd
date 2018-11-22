@@ -8,7 +8,31 @@ import os
 from subprocess import call
 
 class SetParams:
+    """
+        This class allows a user to set the relevant parameters of the cpw. This needs refactorinng, but is sufficient for now. 
+    """
     def __init__(self):
+        """
+            Initialize with parameters
+            
+            :type w: float
+            :param w: width of substrate
+
+            :type t: float
+            :param t: thickness of superconductor
+
+            :type l: float
+            :param l: length of supercondducting wire
+
+            :type pen: float
+            :param pen: penetration depth
+
+            :type omega: float
+            :param omega: cavity resonant frequency
+
+            :type Z: float
+            :param w: characteristic impedance
+        """
         self.w = None
         self.t = None
         self.l = None
@@ -17,14 +41,28 @@ class SetParams:
         self.Z = None
         self.N = 2
 
-    def set_params(self):
-        self.w = 10e-06
-        self.t = 50e-09
-        self.l = 8.194e-03
-        self.pen = 200e-09
-        self.omega = 7.3e09
-        self.Z = 50
+    def set_params(self,infile):
+        """
+            Returns simulation parameters as a dictionary
+        """
+        # Define geometry of the superconductor
+        paramfile=open(infile,"r")
+        filestring = paramfile.read()
+        filelist = filestring.split("\n")
 
+        pd = {}
+        for fl in filelist:
+            l = fl.split()
+            pd[l[0]] = l[2]
+        paramfile.close()
+
+        self.w = float(pd["w"])
+        self.t = float(pd["t"])
+        self.l = float(pd["l"])
+        self.pen = float(pd["pen"])
+        self.omega = float(pd["omega"])
+        self.Z = float(pd["Z"])
+        
         params = {'w':self.w,
             't':self.t,
             'l':self.l,

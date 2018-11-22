@@ -22,15 +22,33 @@ by_x,by_y,by_z = rdy.read_full_data()
 dbx = np.asarray(bx_z).astype(np.float)
 dby = np.asarray(by_z).astype(np.float)
 
+# Define geometry of the superconductor
+paramfile=open("cpw_parameters.txt","r")
+filestring = paramfile.read()
+filelist = filestring.split("\n")
+
+pd = {}
+for fl in filelist:
+    l = fl.split()
+    pd[l[0]] = l[2]
+paramfile.close()
+
+w = float(pd["w"])
+t = float(pd["t"])
+l = float(pd["l"])
+pen = float(pd["pen"])
+omega = float(pd["omega"])
+Z = float(pd["Z"])
+
 # Postprocess data
-post = postproc.PostProc()
+post = postproc.PostProc(w,t,l,pen,omega,Z)
 
 # Single spin coupling for each point on mesh grid
 g = post.coupling(dbx,dby,theta=0)
 hist, edges = post.spin_density(bx_x,bx_y,g) # density
 
-gens = np.sqrt(sum(edges**2 * hist))
-print(gens)
+#gens = np.sqrt(sum(edges**2 * hist))
+#print(gens)
 
 # Calculate Purcell enhancement at each grid point
 Q = 10000 # Q factor - for now typed in, but will be found from CST calcs ultimately
