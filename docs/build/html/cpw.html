@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CPW &mdash; qsd 0.01 documentation</title>
+  <title>&lt;no title&gt; &mdash; qsd 0.01 documentation</title>
   
 
   
@@ -99,6 +99,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="current_density.html">Preprocessing - Determine the Current Density</a></li>
+<li class="toctree-l1"><a class="reference internal" href="addremote.html">Adding a remote machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="remote_connection.html">Interfacing with a Remote Machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="single_spin_coupling.html">Postprocessing - Single Spin Coupling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="purcell_enhancement.html">Postprocessing - Purcell Enhancement</a></li>
@@ -150,7 +151,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>CPW</li>
+      <li>&lt;no title&gt;</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -169,58 +170,55 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-cpw">
-<span id="cpw"></span><h1>CPW<a class="headerlink" href="#module-cpw" title="Permalink to this headline">¶</a></h1>
-<p>This program wil calculate the electromagnetic properties of cpw resonators</p>
+  <span class="target" id="module-qsd.electromagnetics.cpw"></span><p>This program wil calculate the electromagnetic properties of cpw resonators</p>
 <dl class="class">
-<dt id="cpw.CPW">
-<em class="property">class </em><code class="descclassname">cpw.</code><code class="descname">CPW</code><span class="sig-paren">(</span><em>x</em>, <em>l</em>, <em>w</em>, <em>t</em>, <em>pen</em>, <em>Z</em>, <em>omega</em><span class="sig-paren">)</span><a class="headerlink" href="#cpw.CPW" title="Permalink to this definition">¶</a></dt>
+<dt id="qsd.electromagnetics.cpw.CPW">
+<em class="property">class </em><code class="descclassname">qsd.electromagnetics.cpw.</code><code class="descname">CPW</code><span class="sig-paren">(</span><em>x</em>, <em>l</em>, <em>w</em>, <em>t</em>, <em>pen</em>, <em>Z</em>, <em>omega</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.electromagnetics.cpw.CPW" title="Permalink to this definition">¶</a></dt>
 <dd><p>CPW contains the methods for calculating electromagntic properties of cpw resonator</p>
 <dl class="method">
-<dt id="cpw.CPW.E">
-<code class="descname">E</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cpw.CPW.E" title="Permalink to this definition">¶</a></dt>
+<dt id="qsd.electromagnetics.cpw.CPW.E">
+<code class="descname">E</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.electromagnetics.cpw.CPW.E" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates electroc field of supercodnuctor</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cpw.CPW.J">
-<code class="descname">J</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cpw.CPW.J" title="Permalink to this definition">¶</a></dt>
+<dt id="qsd.electromagnetics.cpw.CPW.J">
+<code class="descname">J</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.electromagnetics.cpw.CPW.J" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates un-normalized vacuum current density</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cpw.CPW.conductivity">
-<code class="descname">conductivity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cpw.CPW.conductivity" title="Permalink to this definition">¶</a></dt>
+<dt id="qsd.electromagnetics.cpw.CPW.conductivity">
+<code class="descname">conductivity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.electromagnetics.cpw.CPW.conductivity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates conductivity of superconductor</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cpw.CPW.current">
-<code class="descname">current</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cpw.CPW.current" title="Permalink to this definition">¶</a></dt>
+<dt id="qsd.electromagnetics.cpw.CPW.current">
+<code class="descname">current</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qsd.electromagnetics.cpw.CPW.current" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates critical current</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cpw.CPW.normalize_J">
-<code class="descname">normalize_J</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cpw.CPW.normalize_J" title="Permalink to this definition">¶</a></dt>
+<dt id="qsd.electromagnetics.cpw.CPW.normalize_J">
+<code class="descname">normalize_J</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.electromagnetics.cpw.CPW.normalize_J" title="Permalink to this definition">¶</a></dt>
 <dd><p>Normalizes vacuum current density</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cpw.CPW.resistance">
-<code class="descname">resistance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cpw.CPW.resistance" title="Permalink to this definition">¶</a></dt>
+<dt id="qsd.electromagnetics.cpw.CPW.resistance">
+<code class="descname">resistance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.electromagnetics.cpw.CPW.resistance" title="Permalink to this definition">¶</a></dt>
 <dd><p>calculates resistance of superconductor</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cpw.CPW.resistivity">
-<code class="descname">resistivity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cpw.CPW.resistivity" title="Permalink to this definition">¶</a></dt>
+<dt id="qsd.electromagnetics.cpw.CPW.resistivity">
+<code class="descname">resistivity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qsd.electromagnetics.cpw.CPW.resistivity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates resistivity of superconductor</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
 
 
            </div>
