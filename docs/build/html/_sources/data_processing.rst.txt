@@ -4,7 +4,7 @@ data_processing
 preproc
 ^^^^^^^
 .. automodule:: qsd.data_processing.preproc
-  :members:
+   :members:
 
 ::
 
@@ -27,7 +27,7 @@ preproc
 setparams
 ^^^^^^^^^
 .. automodule:: qsd.data_processing.setparams
-  :members:
+   :members:
 
 ::
 
@@ -229,9 +229,10 @@ postproc
 .. automodule:: qsd.data_processing.postproc
    :members:
 
- ::
+::
 
-     #!/usr/bin/env python
+
+    #!/usr/bin/env python
 
     """
     This program allows a user to determine certain figures of merit of interest for cpw resonators for quantum spin dynamics.
@@ -240,7 +241,7 @@ postproc
     import numpy as np
     import numpy.matlib
     from scipy import constants as sp
-    from . import setparams
+    from qsd.data_processing import setparams
 
     class PostProc:
         """

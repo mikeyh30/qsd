@@ -7,7 +7,7 @@ This program allows a user to determine certain figures of merit of interest for
 import numpy as np
 import numpy.matlib
 from scipy import constants as sp
-from . import setparams
+from qsd.data_processing import setparams
 
 class PostProc:
     """
