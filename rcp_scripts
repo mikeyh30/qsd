@@ -1,0 +1,9 @@
+#!/bin/bash
+
+rsync -av --exclude='qsd/electromagnetics/__init__.py' --exclude='qsd/electromagnetics/__pycache__/' qsd/electromagnetics/ docs/source
+
+rsync -av --exclude='qsd/data_processing/__init__.py' --exclude='qsd/data_processing/__pycache__/' qsd/data_processing/ docs/source/
+
+rsync -av --exclude='qsd/ssh_control/__init__.py' --exclude='qsd/ssh_control/__pycache__/' qsd/ssh_control/ docs/source
+
+
