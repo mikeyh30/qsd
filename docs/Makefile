@@ -4,8 +4,8 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 #SPHINXBUILD   = python -msphinx
-SPHINXBUILD   = python3 -m sphinx
-#SPHINXBUILD   = python3 -c "import sys,sphinx;sys.exit(sphinx.main(sys.argv))"
+#SPHINXBUILD   = python3 -m sphinx
+SPHINXBUILD   = python3 -c "import sys,sphinx;sys.exit(sphinx.main(sys.argv))"
 SPHINXPROJ    = qsd
 SOURCEDIR     = source
 BUILDDIR      = build
