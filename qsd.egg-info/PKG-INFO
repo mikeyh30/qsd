@@ -1,4 +1,4 @@
-Metadata-Version: 1.0
+Metadata-Version: 1.2
 Name: qsd
 Version: 0.1.0
 Summary: UNKNOWN
@@ -10,3 +10,4 @@ Project-URL: Documentation, https://packaging.python.org/tutorials/distributing-
 Project-URL: Source, https://github.com/garethsion/qsd.git
 Description: UNKNOWN
 Platform: UNKNOWN
+Requires-Python: >3.5.2
