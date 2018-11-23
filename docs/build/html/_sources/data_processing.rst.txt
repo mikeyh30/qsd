@@ -396,7 +396,7 @@ postproc
             ue = sp.physical_constants["Bohr magneton"][0]
             g = [*map(lambda x,y: 0.47 * ue * np.sqrt(y**2 + x**2),dbx,dby)]
             g = np.asarray([x / sp.h for x in g])
-            return g
+            return g 
 
         def average_photon_number(self):
             """

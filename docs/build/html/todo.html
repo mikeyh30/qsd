@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Gallery" href="gallery.html" />
-    <link rel="prev" title="Using the Package" href="usage.html" /> 
+    <link rel="prev" title="How the COMSOL Simulation Works" href="howitworks.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -86,6 +86,7 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Using the Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howitworks.html">How the COMSOL Simulation Works</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">To Do List</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
@@ -94,12 +95,13 @@
 <li class="toctree-l1"><a class="reference internal" href="help.html">Help</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="vacuumflucs.html">vacuum_flucs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sshcommand.html">SSH_Command</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dataprocess.html">process_data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electromagnetics.html">electromagnetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh_control.html">ssh_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_processing.html">data_processing</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="current_density.html">Preprocessing - Determine the Current Density</a></li>
+<li class="toctree-l1"><a class="reference internal" href="addremote.html">Adding a remote machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="remote_connection.html">Interfacing with a Remote Machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="single_spin_coupling.html">Postprocessing - Single Spin Coupling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="purcell_enhancement.html">Postprocessing - Purcell Enhancement</a></li>
@@ -174,9 +176,9 @@
 <h1>To Do List<a class="headerlink" href="#to-do-list" title="Permalink to this headline">¶</a></h1>
 <p>This code is still a work in progress. There are quite a few things I still have to do. A detailed list is given below:</p>
 <ul class="simple">
-<li>Include EPR spectra code to calculate the eigenvalues of the EPR transitions. This then forms a key value going into the calculation for the single spin coupling, i.e. we need to calculate <span class="math">\(\left&lt; m_{f} \right| \hat{S}_{x} \left| m_{f} \right&gt;\)</span> for the single spin coupling.</li>
+<li>Include EPR spectra code to calculate the eigenvalues of the EPR transitions. This then forms a key value going into the calculation for the single spin coupling, i.e. we need to calculate <span class="math notranslate nohighlight">\(\left&lt; m_{f} \right| \hat{S}_{x} \left| m_{f} \right&gt;\)</span> for the single spin coupling.</li>
 </ul>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[g=\left&lt; m_{f} \right| \hat{S}_{x} \left| m_{f} \right&gt;\gamma_{e}\sqrt{\delta B^{2}_{y} + \left(\cos \theta \right) \delta B^{2}_{x} }\]</div>
 <ul class="simple">
 <li>Automate CST procedure to calculate impedance and external q factor</li>
@@ -197,7 +199,7 @@
         <a href="gallery.html" class="btn btn-neutral float-right" title="Gallery" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="usage.html" class="btn btn-neutral" title="Using the Package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="howitworks.html" class="btn btn-neutral" title="How the COMSOL Simulation Works" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -227,21 +229,11 @@
 
     
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'./',
-              VERSION:'0.01',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script type="text/javascript" src="_static/jquery.js"></script>
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   
