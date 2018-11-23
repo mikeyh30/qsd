@@ -33,11 +33,11 @@ class SSHCommand:
 
         """
         self.host = host
-        self.host_network = kwargs('host_network',None) 
-        self.full_host = self.host + "@" + self.full_host
-        self.user = kawrgs.get('user',None)
+        self.host_network = kwargs.get('host_network','ee.ucl.ac.uk') 
+        self.full_host = self.host + "@" + self.host_network
+        self.user = kwargs.get('user','ucapxxx')
         self.model = kwargs.get('model','cpw_vacuum_calcs.mph')
-        self.paramfile = kwargs.get('paramfile',None)
+        self.paramfile = kwargs.get('paramfile','paramfile.txt')
         return
 
     def add_remote_machine(self):

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
         name="qsd",
-        version="0.1.0",
+        version="0.1.2",
         packages=find_packages(exclude=['*test']),
         author="Gareth Sion Jones",
         author_email="garethsion@googlemail.com",
