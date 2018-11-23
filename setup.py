@@ -9,9 +9,9 @@ setup(
         author="Gareth Sion Jones",
         author_email="garethsion@googlemail.com",
         project_urls={
-            'Documentation': 'https://packaging.python.org/tutorials/distributing-packages/',
+            'Documentation': 'https://qsd.readthedocs.io/',
             'Source': 'https://github.com/garethsion/qsd.git',
             },
-        python_requires='>3.5.2',
+        python_requires='>3.4.0',
         install_requires=['numpy','scipy']
     )
