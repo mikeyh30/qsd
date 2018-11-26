@@ -35,7 +35,7 @@ Post-Processing
 
 1.) Spin density
 
-.. image:: figs/g_density.eps
+.. image:: figs/g_density_delta.eps
    :width: 500
 
 2.) Purcell enhancement
