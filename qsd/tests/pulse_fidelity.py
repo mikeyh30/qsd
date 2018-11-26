@@ -57,5 +57,12 @@ for i in range (0,len(laredge)-1):
 
 rho_weighted = lardens * g_weight**2
 
-plt.plot(laredge,rho_weighted)
+
+fig = plt.figure()
+plt.plot(laredge,rho_weighted,'-')
+plt.xlabel('$\\theta (rad/s)$',fontsize=28)
+plt.ylabel('$\\rho(\\theta)$',fontsize=28)
+plt.tick_params(direction='out', length=6, width=2, colors='k',labelsize=18)
+plt.tight_layout()
 plt.show()
+plt.savefig(os.getcwd() + '/figs/pulse_fidelity.eps')

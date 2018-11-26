@@ -21,7 +21,7 @@ by_x,by_y,by_z = rdy.read_full_data()
 dbx = np.asarray(bx_z).astype(np.float)
 dby = np.asarray(by_z).astype(np.float)
 
-# # Define geometry of the superconductor
+# Define geometry of the superconductor
 setp = setparams.SetParams()
 params = setp.set_params("cpw_parameters.txt")
 
@@ -37,7 +37,24 @@ post = postproc.PostProc(w,t,l,pen,omega,Z)
 
 # Single spin coupling for each point on mesh grid
 g = post.coupling(dbx,dby,theta=0)
-hist, edges = post.spin_density(bx_x,bx_y,g) # density
 
-plt.plot(edges,hist)
+# Calculate Purcell enhancement at each grid point
+Q = 10000 # Q factor - for now typed in, but will be found from CST calcs ultimately
+purcell = post.purcell_rate(g,Q)
+pdens, pedge = post.purcell_density(bx_x,bx_y,purcell) # density
+
+# Weight by contribution to signal
+g_weight = np.zeros(len(pedge))
+for i in range (0,len(pedge)-1):
+    g_weight[i] = sum(g[np.where(np.logical_and(purcell>=pedge[i], purcell<=pedge[i+1]))])
+
+rho_weighted = pdens * g_weight**2
+
+fig = plt.figure()
+plt.plot(pedge*1e2,rho_weighted,'-')
+plt.xlabel('$\\Gamma (Hz) * 10^{2}$',fontsize=28)
+plt.ylabel('$\\rho(\\Gamma)$',fontsize=28)
+plt.tick_params(direction='out', length=6, width=2, colors='k',labelsize=18)
+plt.tight_layout()
 plt.show()
+fig.savefig(os.getcwd() + '/figs/purcell_density.eps', dpi=fig.dpi)

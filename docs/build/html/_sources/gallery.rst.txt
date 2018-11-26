@@ -29,3 +29,21 @@ COMSOL Images
 
 .. image:: figs/By.jpeg
    :width: 700
+
+Post-Processing
+^^^^^^^^^^^^^^^
+
+1.) Spin density
+
+.. image:: figs/g_density.eps
+   :width: 500
+
+2.) Purcell enhancement
+
+.. image:: figs/purcell_density.eps
+   :width: 500
+
+3.) Pulse fidelity
+
+.. image:: figs/pulse_fidelity.eps
+   :width: 500

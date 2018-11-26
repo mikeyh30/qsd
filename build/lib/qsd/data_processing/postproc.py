@@ -82,7 +82,7 @@ class PostProc:
         """
         Method to calculate histogram
         """
-        bin_num = kwargs.get('bins',500)
+        bin_num = kwargs.get('bins',100)
         Ncell = self.ncell(x,y,param)
         param = np.matlib.repmat(param, 1, Ncell)
         

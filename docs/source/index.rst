@@ -1,6 +1,9 @@
 Quantum Spin Dynamics Resonator Calculations Documentation
 ==========================================================
 
+.. image:: figs/logo-white-blue.png
+   :width: 700
+
 Often when using coplanar waveguide resonators for quantum spin dynamics, it is desirable to understand certain critical figures of merit. However, the workflow required for determining these data is often quite laborious. This package details an automated procedure calling ssh protocols into remote machines..
 
 Please note, this package is still as yet a work in progress. I will update a working 'ToDo' list frequently, and I will ocasionally be tidying up the code and folder sturcture.
