@@ -42,29 +42,29 @@ class CPW:
         :param l: voltage
 
         """
-        self.x = x
-        self.l = l
-        self.w = w
-        self.t = t
-        self.pen = pen
-        self.Z = Z
-        self.omega = omega
-        self.V = 1
+        self.__x = x
+        self.__l = l
+        self.__w = w
+        self.__t = t
+        self.__pen = pen
+        self.__Z = Z
+        self.__omega = omega
+        self.__V = 1
     
     def J(self):
         """
         Calculates un-normalized vacuum current density
         """
         ans = []
-        for i in self.x:
-            if abs(i) > self.w/2.:
+        for i in self.__x:
+            if abs(i) > self.__w/2.:
                 ans.append(0)
-            elif abs(i) == self.w/2.:
-                ans.append(1.165/self.pen*(self.w*self.t)**.5)
-            elif abs(i) < self.w/2. and abs(i) > self.w/2. - self.pen**2/(2*self.t):
-                ans.append(1.165/self.pen*(self.w*self.t)**.5*np.exp(-(self.w/2. - abs(i))*self.t/self.pen**2))
+            elif abs(i) == self.__w/2.:
+                ans.append(1.165/self.__pen*(self.__w*self.__t)**.5)
+            elif abs(i) < self.__w/2. and abs(i) > self.__w/2. - self.__pen**2/(2*self.__t):
+                ans.append(1.165/self.__pen*(self.__w*self.__t)**.5*np.exp(-(self.__w/2. - abs(i))*self.__t/self.__pen**2))
             else:
-                ans.append((1 - (2*abs(i)/self.w)**2)**-.5)
+                ans.append((1 - (2*abs(i)/self.__w)**2)**-.5)
         return np.asarray(ans)
     
     def normalize_J(self):
@@ -73,9 +73,9 @@ class CPW:
         """
         #normalise 
         Js = self.J()
-        dI = self.omega*(sp.hbar/(2*self.Z))**.5
-        dx = self.x[1] - self.x[0]
-        Jnorm = dI*Js/(self.t*dx*np.sum(Js))
+        dI = self.__omega*(sp.hbar/(2*self.__Z))**.5
+        dx = self.__x[1] - self.__x[0]
+        Jnorm = dI*Js/(self.__t*dx*np.sum(Js))
         return Jnorm
     
     def current(self,*args,**kwargs):
@@ -85,24 +85,24 @@ class CPW:
         norm = kwargs.get('norm','yes')
 
         if norm=='yes':
-            I = self.l * self.normalize_J()
+            I = self.__l * self.normalize_J()
         else:
-            I = self.l * self.J()
+            I = self.__l * self.J()
         return I
     
     def resistance(self):
         """
         calculates resistance of superconductor
         """
-        R = self.V / self.current()
+        R = self.__V / self.current()
         return R
     
     def resistivity(self):
         """
         Calculates resistivity of superconductor
         """
-        A = self. w * self.t # Cross-sectional area of cpw
-        rho = self.resistance() * (A / self.l)
+        A = self.__w * self.__t # Cross-sectional area of cpw
+        rho = self.resistance() * (A / self.__l)
         return rho
         
     def conductivity(self):

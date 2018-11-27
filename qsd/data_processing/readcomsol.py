@@ -16,7 +16,7 @@ class ReadComsol:
         """
             Initialize with COMSOL file
         """
-        self.file = file
+        self.__file = file
 
     def read_1D_comsol_data(self):
         """
@@ -24,7 +24,7 @@ class ReadComsol:
         """
         x=[]
         y=[]
-        with open(self.file, 'r') as rf:
+        with open(self.__file, 'r') as rf:
             reader = csv.reader(rf, delimiter=',')
             for row in reader:
                 x.append(row[0])
@@ -40,7 +40,7 @@ class ReadComsol:
         x=[]
         y=[]
         z=[]
-        with open(self.file, 'r') as rf:
+        with open(self.__file, 'r') as rf:
             reader = csv.reader(rf, delimiter=',')
             for row in reader:
                 x.append(row[0])
@@ -58,7 +58,7 @@ class ReadComsol:
         x=[]
         y=[]
         z=[]
-        with open(self.file, 'r') as rf:
+        with open(self.__file, 'r') as rf:
             reader = csv.reader(rf, delimiter=',')
             for row in reader:
                 x.append(row[0])

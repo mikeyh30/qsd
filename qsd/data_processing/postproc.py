@@ -17,26 +17,24 @@ class PostProc:
         """
         Initializes resonator structure
         """
-        #setp = setparams.SetParams()
-        #params = setp.set_params()
-        #self.w = params["w"]
-        #self.t = params["t"]
-        #self.l = params["l"]
-        #self.pen = params["pen"]
-
-        #define the resonator - from CST or experiment
-        #self.omega = params["omega"]
-        #self.Z = params["Z"]
-        self.w = w
-        self.t = t
-        self.l = l
-        self.pen = pen
-        self.omega = omega
-        self.Z = Z
+        self.__w = w
+        self.__t = t
+        self.__l = l
+        self.__pen = pen
+        self.__omega = omega
+        self.__Z = Z
         
-        self.g = None
+        self.__g = None
 
-        self.volume_cell = None
+        self.__volume_cell = None
+
+    def spinmap(self,xin,yin,spin_depth):
+        """
+            Defines the layer at which spins are implanted. At the moment, only specified for bulk doping
+        """
+        xs = xin[(yin >= -spin_depth) & (yin <= 0.0)]
+        ys = yin[(yin >= -spin_depth) & (yin <= 0.0)]
+        return xs,ys
 
     def B1(self,dbx,dby,theta):
         """
@@ -67,22 +65,22 @@ class PostProc:
         theta = kwargs.get('theta',0)
         ang = np.cos(theta)
         ue = sp.physical_constants["Bohr magneton"][0]
-        self.g = 0.47 * ue * np.sqrt(By**2 + (ang**2) * Bx**2)
-        return self.g/sp.h
+        self.__g = 0.47 * ue * np.sqrt(By**2 + (ang**2) * Bx**2)
+        return self.__g/sp.h
 
     def cut_line_spin_density(self,g):
         """
         Calculates the spin density for cut line section
         """
-        self.volume_cell = g * self.t * self.l
-        rho =  sp.m_e / self.volume_cell
+        self.__volume_cell = g * self.__t * self.__l
+        rho =  sp.m_e / self.__volume_cell
         return rho
 
     def distribution(self,x,y,param,*args,**kwargs):
         """
         Method to calculate histogram
         """
-        bin_num = kwargs.get('bins',500)
+        bin_num = kwargs.get('bins',50)
         Ncell = self.ncell(x,y,param)
         param = np.matlib.repmat(param, 1, Ncell)
         
@@ -93,26 +91,29 @@ class PostProc:
         edges = edges[0:len(hist)] # shift bin edges to get the same length as data
         return hist, edges
 
-    def spin_density(self,x,y,g):
+    def spin_density(self,x,y,g,*args,**kwargs):
         """
         Calculates distribution of spins in resonator
         """
-        hist, edges = self.distribution(x,y,g)
+        bin_num = kwargs.get('bins',50)
+        hist, edges = self.distribution(x,y,g,bins=bin_num)
 
         return hist, edges
 
-    def larmor_density(self,x,y,theta_larmor):
+    def larmor_density(self,x,y,theta_larmor,*args,**kwargs):
         """ 
         Calculates distribution of Larmor frequency
         """
-        hist, edges = self.distribution(x,y,theta_larmor)
+        bin_num = kwargs.get('bins',50)
+        hist, edges = self.distribution(x,y,theta_larmor,bins=bin_num)
         return hist, edges
 
-    def purcell_density(self,x,y,gamma):
+    def purcell_density(self,x,y,gamma,*args,**kwargs):
         """
         Calculates distribution of purcell rate in resomator
         """
-        hist, edges = self.distribution(x,y,gamma)
+        bin_num = kwargs.get('bins',50)
+        hist, edges = self.distribution(x,y,gamma,bins=bin_num)
         return hist, edges
 
     def ncell(self,x,y,param):
@@ -123,6 +124,8 @@ class PostProc:
         param=param.reshape(len(param),1)
 
         # Calculate the size of the boxes
+        if type(x) != list:
+            x = list(x)
         bucket = x.count(x[0]) # number of samples for each point in space
         x_box = abs(float(x[bucket-1]) - float(x[bucket]))
         y_box = abs(float(y[0]) - float(y[1]))
@@ -138,9 +141,9 @@ class PostProc:
         """
         Calculates the Purcell rate
         """
-        k = self.omega / Q
-        omega_s = kwargs.get('omega_s',self.omega)
-        delta = self.omega - omega_s
+        k = self.__omega / Q
+        omega_s = kwargs.get('omega_s',self.__omega)
+        delta = self.__omega - omega_s
         
         purcell = k * ((g**2) / (k**2) / (4 + delta**2))
         # purcell = (4*(g**2)) / k
@@ -150,7 +153,7 @@ class PostProc:
         """
         Calculates the Purcell enhancement induced by the cavity
         """
-        F = ( 3 / (4*np.pi**2) ) * (lambda_c / n)**3 * ( Q / (self.w * self.t * self.l))
+        F = ( 3 / (4*np.pi**2) ) * (lambda_c / n)**3 * ( Q / (self.__w * self.__t * self.__l))
         return F 
 
     def coupling(self,dbx,dby,*args,**kwargs):
@@ -168,7 +171,7 @@ class PostProc:
         """
         Calculates average photon number
         """
-        n = (4 * k1 * Pin) / (sp.hbar * self.omega * (k1 + k2 + kL)**2)
+        n = (4 * k1 * Pin) / (sp.hbar * self.__omega * (k1 + k2 + kL)**2)
         return n
 
     def cooperativity(self):

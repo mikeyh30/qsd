@@ -33,13 +33,13 @@ class SetParams:
             :type Z: float
             :param w: characteristic impedance
         """
-        self.w = None
-        self.t = None
-        self.l = None
-        self.pen = None
-        self.omega = None
-        self.Z = None
-        self.N = 2
+        self.__w = None
+        self.__t = None
+        self.__l = None
+        self.__pen = None
+        self.__omega = None
+        self.__Z = None
+        self.__N = 2
 
     def set_params(self,infile):
         """
@@ -56,19 +56,19 @@ class SetParams:
             pd[l[0]] = l[2]
         paramfile.close()
 
-        self.w = float(pd["w"])
-        self.t = float(pd["t"])
-        self.l = float(pd["l"])
-        self.pen = float(pd["pen"])
-        self.omega = float(pd["omega"])
-        self.Z = float(pd["Z"])
+        self.__w = float(pd["w"])
+        self.__t = float(pd["t"])
+        self.__l = float(pd["l"])
+        self.__pen = float(pd["pen"])
+        self.__omega = float(pd["omega"])
+        self.__Z = float(pd["Z"])
         
-        params = {'w':self.w,
-            't':self.t,
-            'l':self.l,
-            'pen':self.pen,
-            'omega':self.omega,
-            'Z':self.Z
+        params = {'w':self.__w,
+            't':self.__t,
+            'l':self.__l,
+            'pen':self.__pen,
+            'omega':self.__omega,
+            'Z':self.__Z
         }
         return params
 
@@ -80,24 +80,24 @@ class SetParams:
         idx = n.index(min(n))
 
         I0 = I[idx]
-        J0 = I0/(2*(self.w+self.t)*self.pen)
-        pen_perp = self.pen**2 / (2*self.t)
-        C = (0.506*np.sqrt(self.w/(2*pen_perp)))**0.75
-        l1 = self.pen*np.sqrt(2*self.pen/pen_perp)
-        l2 = 0.774*self.pen**2/pen_perp + 0.5152*pen_perp
-        J2overJ1 = (1.008/np.cosh(self.t/self.pen)*np.sqrt(self.w/pen_perp/
-            (4*pen_perp/self.pen - 0.08301*self.pen/pen_perp)))
+        J0 = I0/(2*(self.__w+self.__t)*self.__pen)
+        pen_perp = self.__pen**2 / (2*self.__t)
+        C = (0.506*np.sqrt(self.__w/(2*pen_perp)))**0.75
+        l1 = self.__pen*np.sqrt(2*self.__pen/pen_perp)
+        l2 = 0.774*self.__pen**2/pen_perp + 0.5152*pen_perp
+        J2overJ1 = (1.008/np.cosh(self.__t/self.__pen)*np.sqrt(self.__w/pen_perp/
+            (4*pen_perp/self.__pen - 0.08301*self.__pen/pen_perp)))
         J1 = Jnorm[idx]
-        w_sub = 4*self.w
+        w_sub = 4*self.__w
         h_sub = 25e-06
 
         f = open(paramfile,'w')
-        f.write('w ' + str(self.w) + '[m] width_of_superconductor\n'
-           't ' + str(self.t) + '[m] thickness_of_superconductor\n'
-           'pen ' + str(self.pen) + '[m] penetration_depth\n'
+        f.write('w ' + str(self.__w) + '[m] width_of_superconductor\n'
+           't ' + str(self.__t) + '[m] thickness_of_superconductor\n'
+           'pen ' + str(self.__pen) + '[m] penetration_depth\n'
            'I0 ' + str(I0) + '[A/m] current_at_x=0\n'
            'J0 ' + str(J0) + '[A/m^3] current_density_at_x=0\n'
-           'N ' + str(self.N) + '\n'
+           'N ' + str(self.__N) + '\n'
            'w_sub ' + str(w_sub) + '[m] substrate_width\n'
            'h_sub ' + str(h_sub) + '[m] substrate_height\n'
            'pen_perp ' + str(pen_perp) + '[m] perpendicular_pen_depth\n'
