@@ -91,7 +91,7 @@ class SSHCommand:
         file.write("\n")
         file.write('HOST="%s"\n' % self.__host)
         file.write('echo "Running COMSOL on ${HOST}"\n')
-        file.write("ssh ${HOST} 'cd COMSOL_files && ./job input/cpw_vacuum_calcs.mph'; exit\n")
+        file.write("ssh ${HOST} 'cd COMSOL_files && bash job input/cpw_vacuum_calcs.mph'; exit\n")
         file.close()
         self.call_bash(filename)
    
@@ -130,7 +130,7 @@ class SSHCommand:
         file.close()
         self.call_bash(filename)
     
-    def get_comsol_data(self):
+    def get_comsol_data(self, host_machine):
         """
             Retrieve exported data from remote machine
         """
@@ -145,7 +145,7 @@ class SSHCommand:
         file = open(filename,"w")
         file.write("#!/bin/bash\n")
         file.write("\n")
-        file.write('HOST="gade"\n')
+        file.write('HOST="'+host_machine+'"\n')
         file.write('REMOTEDIR="COMSOL_files/exports"\n')
         file.write('DOWNLOADDIR="%s"\n' % down_dir)
         file.write('scp -r ${HOST}:${REMOTEDIR} ${DOWNLOADDIR}\n')
@@ -163,7 +163,7 @@ class SSHCommand:
         file = open(filename,"w")
         file.write("#!/bin/bash\n")
         file.write("\n")
-        file.write("chmod +xu job\n")
+        file.write("chmod +u job\n")
         file.write('scp job %s:~/COMSOL_files\n' %self.__host)
         file.close()
         self.call_bash(filename)
