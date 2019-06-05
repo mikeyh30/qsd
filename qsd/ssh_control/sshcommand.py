@@ -36,8 +36,9 @@ class SSHCommand:
         self.__host_network = kwargs.get('host_network','ee.ucl.ac.uk') 
         self.__full_host = self.__host + "@" + self.__host_network
         self.__user = kwargs.get('user','ucapxxx')
-        self.__model = kwargs.get('model','cpw_vacuum_calcs.mph')
+        self.__model = kwargs.get('model','swag.mph')
         self.__paramfile = kwargs.get('paramfile','paramfile.txt')
+        self.__currentdfile = kwargs.get('currentdfile','current_density.csv')
         return
 
     def add_remote_machine(self):
@@ -91,7 +92,7 @@ class SSHCommand:
         file.write("\n")
         file.write('HOST="%s"\n' % self.__host)
         file.write('echo "Running COMSOL on ${HOST}"\n')
-        file.write("ssh ${HOST} 'cd COMSOL_files && bash job input/cpw_vacuum_calcs.mph'; exit\n")
+        file.write("ssh ${HOST} 'cd COMSOL_files && bash job input/'%s''; exit\n" % self.__model)
         file.close()
         self.call_bash(filename)
    
@@ -122,9 +123,12 @@ class SSHCommand:
         file.write("\n")
         file.write('MODELNAME="%s"\n' % self.__model)
         file.write('PARAMFILE="${MODELNAME}.txt"\n')
+        file.write('CURRENTDFILE="%s"\n' % self.__currentdfile)
         file.write('cp "%s" ${PARAMFILE}\n' % self.__paramfile)
         file.write('scp ${PARAMFILE} %s:~/COMSOL_files/parameter_files\n' % self.__host) 
         #file.write('scp ${PARAMFILE} %s:/homes/gjones/COMSOL_files/parameter_files\n' % self.host)
+        file.write('cp "%s" ${CURRENTDFILE}\n' % self.__currentdfile)
+        file.write('scp ${CURRENTDFILE} %s:~/COMSOL_files/parameter_files\n' % self.__host) 
         file.write("\n")
         file.write('rm ${PARAMFILE}\n')
         file.close()
