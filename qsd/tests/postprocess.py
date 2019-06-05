@@ -47,8 +47,8 @@ post = postproc.PostProc(w,t,l,pen,omega,Z)
 g = post.coupling(dbx,dby,theta=0)
 hist, edges = post.spin_density(bx_x,bx_y,g) # density
 
-#gens = np.sqrt(sum(edges**2 * hist))
-#print(gens)
+gens = np.sqrt(sum(edges**2 * hist))
+print(gens)
 
 # Calculate Purcell enhancement at each grid point
 Q = 10000 # Q factor - for now typed in, but will be found from CST calcs ultimately

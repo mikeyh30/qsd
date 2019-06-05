@@ -108,7 +108,7 @@ class SSHCommand:
         file.write("\n")
         file.write('HOST="%s"\n' % self.__host)
         file.write("ssh ${HOST} '[ ! -d \"COMSOL_files\" ] && echo \"Creating remote folder structire\"&& mkdir COMSOL_files COMSOL_files/input COMSOL_files/output COMSOL_files/exports COMSOL_files/parameter_files;  exit'\n")
-        file.write("scp %s ${HOST}:~/COMSOL_files/input/\n'"  % self.__model)
+        file.write("scp %s ${HOST}:~/COMSOL_files/input/\n"  % self.__model)
         file.close()
         self.call_bash(filename)
 
@@ -203,6 +203,7 @@ class SSHCommand:
         file.write("\n")
         file.write("# run comsol directly from the command line. requires a user input for the input file\n")
         file.write("comsol batch -inputfile ${INPUTFILE} -outputfile ${OPUTPUTFILE} -pname ${NAMES} -plist ${VALUES} -job ${JOB}\n")
+        #file.write("comsol-5.4.0 batch -inputfile ${INPUTFILE} -outputfile ${OPUTPUTFILE} -pname ${NAMES} -plist ${VALUES} -job ${JOB}\n")
         file.write("mv on.* output/\n")
 
     def call_bash(self,filename):

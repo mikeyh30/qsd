@@ -1,0 +1,5 @@
+#!/bin/bash
+
+HOST="cork"
+echo "Running COMSOL on ${HOST}"
+ssh ${HOST} 'cd COMSOL_files && bash job input/cpw_vacuum_calcs.mph'; exit

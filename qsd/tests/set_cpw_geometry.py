@@ -3,7 +3,7 @@ import numpy as np
 import os
 from subprocess import call
 
-file = cpw_parameters.txt
+file = 'cpw_parameters.txt'
 
 x=[]
 y=[]
