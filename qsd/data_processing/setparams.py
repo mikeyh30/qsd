@@ -100,6 +100,7 @@ class SetParams:
         f = open(paramfile,'w')
         f.write('w_ind ' + str(self.__w) + '[m] width_of_inductor\n'
            'h_ind ' + str(self.__t) + '[m] thickness_of_inductor\n'
+           'l_ind ' + str(self.__l) + '[m] length_of_inductor\n'
            'pen ' + str(self.__pen) + '[m] penetration_depth\n'
            'I0 ' + str(I0) + '[A/m] current_at_x=0\n'
            'J0 ' + str(J0) + '[A/m^3] current_density_at_x=0\n'
