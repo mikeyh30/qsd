@@ -40,7 +40,7 @@ post = postproc.PostProc(w,t,l,pen,omega,Z)
 
 # Define spin map
 spin_depth = 150e-03 # um
-xs,ys = post.spinmap(x,y,spin_depth)
+#xs,ys = post.spinmap(x,y,spin_depth)
 dbxs = dbx[(y >= -spin_depth) & (y <= 0.0)]
 dbys = dby[(y >= -spin_depth) & (y <= 0.0)]
 

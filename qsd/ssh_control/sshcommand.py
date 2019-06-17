@@ -36,8 +36,9 @@ class SSHCommand:
         self.__host_network = kwargs.get('host_network','ee.ucl.ac.uk') 
         self.__full_host = self.__host + "@" + self.__host_network
         self.__user = kwargs.get('user','ucapxxx')
-        self.__model = kwargs.get('model','cpw_vacuum_calcs.mph')
+        self.__model = kwargs.get('model','swag.mph')
         self.__paramfile = kwargs.get('paramfile','paramfile.txt')
+        self.__currentdfile = kwargs.get('currentdfile','current_density.csv')
         return
 
     def add_remote_machine(self):
@@ -91,7 +92,7 @@ class SSHCommand:
         file.write("\n")
         file.write('HOST="%s"\n' % self.__host)
         file.write('echo "Running COMSOL on ${HOST}"\n')
-        file.write("ssh ${HOST} 'cd COMSOL_files && ./job input/cpw_vacuum_calcs.mph'; exit\n")
+        file.write("ssh ${HOST} 'cd COMSOL_files && bash job input/'%s''; exit\n" % self.__model)
         file.close()
         self.call_bash(filename)
    
@@ -108,7 +109,7 @@ class SSHCommand:
         file.write("\n")
         file.write('HOST="%s"\n' % self.__host)
         file.write("ssh ${HOST} '[ ! -d \"COMSOL_files\" ] && echo \"Creating remote folder structire\"&& mkdir COMSOL_files COMSOL_files/input COMSOL_files/output COMSOL_files/exports COMSOL_files/parameter_files;  exit'\n")
-        file.write("scp %s ${HOST}:~/COMSOL_files/input/\n'"  % self.__model)
+        file.write("scp %s ${HOST}:~/COMSOL_files/input/\n"  % self.__model)
         file.close()
         self.call_bash(filename)
 
@@ -122,15 +123,18 @@ class SSHCommand:
         file.write("\n")
         file.write('MODELNAME="%s"\n' % self.__model)
         file.write('PARAMFILE="${MODELNAME}.txt"\n')
+        file.write('CURRENTDFILE="%s"\n' % self.__currentdfile)
         file.write('cp "%s" ${PARAMFILE}\n' % self.__paramfile)
         file.write('scp ${PARAMFILE} %s:~/COMSOL_files/parameter_files\n' % self.__host) 
         #file.write('scp ${PARAMFILE} %s:/homes/gjones/COMSOL_files/parameter_files\n' % self.host)
+        file.write('cp "%s" ${CURRENTDFILE}\n' % self.__currentdfile)
+        file.write('scp ${CURRENTDFILE} %s:~/COMSOL_files/parameter_files\n' % self.__host) 
         file.write("\n")
         file.write('rm ${PARAMFILE}\n')
         file.close()
         self.call_bash(filename)
     
-    def get_comsol_data(self):
+    def get_comsol_data(self, host_machine):
         """
             Retrieve exported data from remote machine
         """
@@ -145,7 +149,7 @@ class SSHCommand:
         file = open(filename,"w")
         file.write("#!/bin/bash\n")
         file.write("\n")
-        file.write('HOST="gade"\n')
+        file.write('HOST="'+host_machine+'"\n')
         file.write('REMOTEDIR="COMSOL_files/exports"\n')
         file.write('DOWNLOADDIR="%s"\n' % down_dir)
         file.write('scp -r ${HOST}:${REMOTEDIR} ${DOWNLOADDIR}\n')
@@ -163,7 +167,7 @@ class SSHCommand:
         file = open(filename,"w")
         file.write("#!/bin/bash\n")
         file.write("\n")
-        file.write("chmod +xu job\n")
+        file.write("chmod +u job\n")
         file.write('scp job %s:~/COMSOL_files\n' %self.__host)
         file.close()
         self.call_bash(filename)
@@ -203,6 +207,7 @@ class SSHCommand:
         file.write("\n")
         file.write("# run comsol directly from the command line. requires a user input for the input file\n")
         file.write("comsol batch -inputfile ${INPUTFILE} -outputfile ${OPUTPUTFILE} -pname ${NAMES} -plist ${VALUES} -job ${JOB}\n")
+        #file.write("comsol-5.4.0 batch -inputfile ${INPUTFILE} -outputfile ${OPUTPUTFILE} -pname ${NAMES} -plist ${VALUES} -job ${JOB}\n")
         file.write("mv on.* output/\n")
 
     def call_bash(self,filename):

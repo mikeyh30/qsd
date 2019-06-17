@@ -40,6 +40,9 @@ class SetParams:
         self.__omega = None
         self.__Z = None
         self.__N = 2
+        self.__w_mesa = None
+        self.__h_mesa = None
+        self.__gap_ind = None
 
     def set_params(self,infile):
         """
@@ -61,7 +64,12 @@ class SetParams:
         self.__l = float(pd["l"])
         self.__pen = float(pd["pen"])
         self.__omega = float(pd["omega"])
-        self.__Z = float(pd["Z"])
+        self.__w_cap = float(pd["w_cap"])
+        self.__l_cap = float(pd["l_cap"])
+        self.__gap_cap = float(pd["gap_cap"])
+        self.__w_mesa = float(pd["w_mesa"])
+        self.__h_mesa = float(pd["h_mesa"])
+        self.__gap_ind = float(pd["gap_ind"])
         
         params = {'w':self.__w,
             't':self.__t,
@@ -92,8 +100,9 @@ class SetParams:
         h_sub = 25e-06
 
         f = open(paramfile,'w')
-        f.write('w ' + str(self.__w) + '[m] width_of_superconductor\n'
-           't ' + str(self.__t) + '[m] thickness_of_superconductor\n'
+        f.write('w_ind ' + str(self.__w) + '[m] width_of_inductor\n'
+           'h_ind ' + str(self.__t) + '[m] thickness_of_inductor\n'
+           'l_ind ' + str(self.__l) + '[m] length_of_inductor\n'
            'pen ' + str(self.__pen) + '[m] penetration_depth\n'
            'I0 ' + str(I0) + '[A/m] current_at_x=0\n'
            'J0 ' + str(J0) + '[A/m^3] current_density_at_x=0\n'
@@ -105,7 +114,10 @@ class SetParams:
            'l1 ' + str(l1) + '[m]\n'
            'l2 ' + str(l2) + '[m]\n'
            'J2overJ1 ' + str(J2overJ1) + '\n'
-           'J1 ' + str(J1) + '[A/m]'
+           'J1 ' + str(J1) + '[A/m]\n'
+           'w_mesa ' + str(self.__w_mesa) + '[m]\n'
+           'h_mesa ' + str(self.__h_mesa) + '[m]\n'
+           'gap_ind ' + str(self.__gap_ind) + '[m]'
            )
 
         f.close()
